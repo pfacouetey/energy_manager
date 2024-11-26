@@ -29,10 +29,6 @@ jobs:
           pip install poetry 
           poetry install --no-root
 
-      - name: Install DVC with AWS support
-        run: |
-          poetry add dvc[aws]
-
       - name: Configure AWS Credentials
         env:
           DVC_AWS_ACCESS_KEY_ID: ${{ secrets.DVC_AWS_ACCESS_KEY_ID }}
