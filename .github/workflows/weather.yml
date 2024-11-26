@@ -31,6 +31,10 @@ jobs:
           pip install poetry 
           poetry install
 
+      - name: Install DVC
+        run: |
+          pip install dvc
+
       - name: Pull DVC data
         run: |
           dvc pull
