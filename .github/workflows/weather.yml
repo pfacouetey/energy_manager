@@ -27,7 +27,7 @@ jobs:
       - name: Install Poetry
         run: |
           pip install poetry 
-          poetry install
+          poetry install --no-root
 
       - name: Install DVC with AWS support
         run: |
