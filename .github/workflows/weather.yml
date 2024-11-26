@@ -30,6 +30,10 @@ jobs:
           pip install poetry 
           poetry install
 
+      - name: Pull DVC data
+        run: |
+          dvc pull
+
       - name: Run tests with pytest
         env:
           OPEN_WEATHER_API_KEY: ${{ secrets.OPEN_WEATHER_API_KEY }}
