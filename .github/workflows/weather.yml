@@ -45,7 +45,7 @@ jobs:
 
       - name: Pull DVC data from S3 bucket
         run: |
-          dvc pull --allow-missing
+          poetry run dvc pull --allow-missing
 
       - name: Run tests with pytest
         env:
