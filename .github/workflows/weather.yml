@@ -1,6 +1,3 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
 name: Get weather information
 
 on:
@@ -27,16 +24,25 @@ jobs:
         with:
           python-version: "3.10.5"
 
-      - name: Install dependencies
+      - name: Install Poetry
         run: |
           pip install poetry 
           poetry install
 
-      - name: Install DVC
+      - name: Install DVC with AWS support
         run: |
-          pip install dvc
+          poetry add dvc[aws]
 
-      - name: Pull DVC data
+      - name: Configure AWS Credentials
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.DVC_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DVC_AWS_SECRET_ACCESS_KEY }}
+        run: |
+          echo "[default]" > ~/.aws/config
+          echo "aws_access_key_id=${AWS_ACCESS_KEY_ID}" >> ~/.aws/config
+          echo "aws_secret_access_key=${AWS_SECRET_ACCESS_KEY}" >> ~/.aws/config
+
+      - name: Pull DVC data from S3 bucket
         run: |
           dvc pull --allow-missing
 
