@@ -1,6 +1,6 @@
 from energy_manager.src.utils.get_midnight_utc_timestamp import get_midnight_utc_timestamp
 from energy_manager.src.utils.generate_daily_timestamps import generate_daily_timestamps
-from energy_manager.src.apis.get_daily_weather import get_daily_weather
+from energy_manager.src.apis.weather.get_daily_weather import get_daily_weather
 
 def main() -> None:
     """
