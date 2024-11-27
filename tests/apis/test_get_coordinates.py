@@ -7,7 +7,7 @@ from energy_manager.src.apis.get_coordinates import get_coordinates
     "city_name, city_expected_coordinates",
     [
         ("pariS ", {"lat": 48.8588897, "lon": 2.3200410217200766}),
-        ("PARIS", {"lat": 48.8588897, "lon": 2.3200410217200766}),
+        ("    PARIS", {"lat": 48.8588897, "lon": 2.3200410217200766}),
         ("Toulouse      ", {"lat": 43.6044622, "lon": 1.4442469}),
         ("Montpellier", {"lat": 43.6112422, "lon": 3.8767337}),
         ("Marseille", {"lat": 43.2961743, "lon": 5.3699525}),
@@ -21,7 +21,7 @@ from energy_manager.src.apis.get_coordinates import get_coordinates
 
 def test_get_coordinates(city_name, city_expected_coordinates):
     """
-    Test the get_coordinates function to ensure it returns the correct coordinates for known cities.
+    Test the get_coordinates function to ensure it returns correct coordinates for known cities.
     """
     # Get coordinates for the specified city using the get_coordinates function
     city_actual_coordinates = get_coordinates(city_name)
