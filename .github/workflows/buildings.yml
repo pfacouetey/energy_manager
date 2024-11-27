@@ -31,4 +31,4 @@ jobs:
 
       - name: Run tests with pytest
         run: |
-          poetry run pytest tests/apis/test_get_department.py       
+          poetry run pytest tests/apis/buildings/     
