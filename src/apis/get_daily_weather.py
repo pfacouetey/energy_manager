@@ -7,7 +7,7 @@ from energy_manager.src.apis.get_hourly_weather import get_hourly_weather
 
 def get_daily_weather(city_name: str, timestamps: List[int]) -> Optional[pd.DataFrame]:
    """
-   Fetch weather data for all timestamps and return a concatenated DataFrame.
+   Fetches weather data for a given city at some specified Unix timestamps.
 
    Args:
        city_name (str): Name of the city.

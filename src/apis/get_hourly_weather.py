@@ -8,7 +8,7 @@ from energy_manager.src.apis.get_coordinates import get_coordinates
 
 def get_hourly_weather(city_name: str, timestamp: int) -> Optional[pd.DataFrame]:
    """
-   Get weather description for a given city, country code, and timestamp.
+   Fetches weather data for a given city at a specific Unix timestamp.
 
    Args:
        city_name (str): Name of the city.
