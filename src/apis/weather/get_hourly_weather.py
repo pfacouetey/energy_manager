@@ -3,7 +3,7 @@ import requests
 import pandas as pd
 from typing import Optional
 
-from energy_manager.src.apis.get_coordinates import get_coordinates
+from energy_manager.src.apis.weather.get_coordinates import get_coordinates
 
 
 def get_hourly_weather(city_name: str, timestamp: int) -> Optional[pd.DataFrame]:
