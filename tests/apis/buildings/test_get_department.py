@@ -6,15 +6,15 @@ from energy_manager.src.apis.buildings.get_department import get_department
 @pytest.mark.parametrize(
     "city_name, city_expected_department",
     [
-        ("Nancy", "meurthe-et-moselle"),
-        ("NaNcy ", "meurthe-et-moselle"),
-        ("Toulouse      ", "haute-garonne"),
-        ("PARIS", "paris"),
-        ("STRASBOurG", "bas-rhin"),
-        ("BoRDeauX", "gironde"),
-        ("LiLle", "nord"),
-        ("Nice", "alpes-maritimes"),
-        ("Lyon", "rhone")
+        ("Nancy", "Meurthe-et-Moselle"),
+        ("NaNcy ", "Meurthe-et-Moselle"),
+        ("Toulouse      ", "Haute-Garonne"),
+        ("PARIS", "Paris"),
+        ("STRASBOurG", "Bas-Rhin"),
+        ("BoRDeauX", "Gironde"),
+        ("LiLle", "Nord"),
+        ("Nice", "Alpes-Maritimes"),
+        ("Lyon", "Rhône")
     ]
 )
 
