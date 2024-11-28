@@ -34,6 +34,7 @@ def get_coordinates(city_name: str) -> Optional[Dict[str, float]]:
         if country_code == "FR":
             city_coordinates = {"lat": data[0]["lat"], "lon": data[0]["lon"]}
             return city_coordinates
+
         else:
             print(f"City {city_name} not found in France. Please, specify a city known in France.")
             return None

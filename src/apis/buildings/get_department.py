@@ -25,7 +25,7 @@ def get_department(city_name: str) -> Optional[str]:
         data = response.json()
 
         if data["results"]:
-            department_name = unidecode(data["results"][0]["dep_name"][0].lower())
+            department_name = data["results"][0]["dep_name"][0]
             return department_name
         else:
             print(f"No department found for city {city_name}.")
