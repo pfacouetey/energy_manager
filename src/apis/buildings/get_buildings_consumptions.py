@@ -69,10 +69,8 @@ def get_buildings_consumptions(city_name: str) -> Optional[pd.DataFrame]:
                 return new_data
             print(f"No infos on buildings energy consumption found for the city {city_name}.")
             return None
-
-        else:
-            print(f"Error fetching data: {response.status_code}")
-            return None
+        print(f"Error fetching data: {response.status_code}")
+        return None
 
     else:
         print(f"No department found for city {city_name}.")
