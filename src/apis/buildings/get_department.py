@@ -27,9 +27,8 @@ def get_department(city_name: str) -> Optional[str]:
         if data["results"]:
             department_name = data["results"][0]["dep_name"][0]
             return department_name
-        else:
-            print(f"No department found for city {city_name}.")
-            return None
+        print(f"No department found for city {city_name}.")
+        return None
 
     else:
         print(f"Error fetching data: {response.status_code}")
