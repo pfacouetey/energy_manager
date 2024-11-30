@@ -47,4 +47,4 @@ def test_get_edf_price(expected_subscriptions, expected_columns):
             actual_df_edf_prices["subscription"] == "Heures Creuses - Heures Pleines", "kwh_price_normal_hour"].values[
             0] < actual_df_edf_prices.loc[
             actual_df_edf_prices["subscription"] == "Heures Creuses - Heures Pleines", "kwh_price_peak_hour"].values[
-            0], f"Expected to have normal hour price less than peak hour price for Heures Creuses - Heures Pleines"
+            0], "Expected to have normal hour price less than peak hour price for Heures Creuses - Heures Pleines"
