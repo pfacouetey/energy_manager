@@ -71,7 +71,5 @@ def get_buildings_consumptions(city_name: str) -> Optional[pd.DataFrame]:
             return None
         print(f"Error fetching data: {response.status_code}")
         return None
-
-    else:
-        print(f"No department found for city {city_name}.")
-        return None
+    print(f"No department found for city {city_name}.")
+    return None
