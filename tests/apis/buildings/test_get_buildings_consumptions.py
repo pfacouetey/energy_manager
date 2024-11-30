@@ -28,7 +28,7 @@ def expected_dpe_classes():
 
 def test_get_buildings_consumptions(city_name, expected_columns, expected_data_types, expected_dpe_classes):
     """
-    Test that the function get_buildings_consumptions returns a DataFrame.
+    Test that the function get_buildings_consumptions returns the expected DataFrame.
     """
     df_actual_buildings_consumptions = get_buildings_consumptions(city_name=city_name)
 
@@ -38,11 +38,12 @@ def test_get_buildings_consumptions(city_name, expected_columns, expected_data_t
     )
 
     # Check if the DataFrame contains the expected columns
-    assert len(df_actual_buildings_consumptions.columns.tolist()) == len(expected_columns), (
-        f"Expected {len(expected_columns)} columns for {city_name}, but got {len(df_actual_buildings_consumptions.columns.tolist())}"
+    actual_columns = df_actual_buildings_consumptions.columns.tolist()
+    assert len(actual_columns) == len(expected_columns), (
+        f"Expected {len(expected_columns)} columns for {city_name}, but got {len(actual_columns)}"
     )
-    assert all(column in df_actual_buildings_consumptions.columns.tolist() for column in expected_columns), (
-        f"Expected columns {expected_columns} for {city_name}, but got {df_actual_buildings_consumptions.columns.tolist()}"
+    assert all(column in actual_columns for column in expected_columns), (
+        f"Expected columns {expected_columns} for {city_name}, but got {actual_columns}"
     )
 
     # Check if the DataFrame data types are as expected

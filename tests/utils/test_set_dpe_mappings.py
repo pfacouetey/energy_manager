@@ -1,6 +1,6 @@
 import pytest
 
-from energy_manager.src.utils.get_dpe_mappings import get_dpe_mappings
+from energy_manager.src.utils.set_dpe_mappings import set_dpe_mappings
 
 
 @pytest.fixture()
@@ -17,9 +17,9 @@ def expected_dpe_values_order():
 
 def test_get_dpe_mappings(expected_dpe_classes, expected_dpe_classes_order, expected_dpe_values_order):
     """
-    Test that the function get_dpe_mappings returns a dictionary with the expected DPE classes.
+    Test that the function set_dpe_mappings returns a dictionary with the expected DPE classes.
     """
-    actual_dpe_mappings = get_dpe_mappings()
+    actual_dpe_mappings = set_dpe_mappings()
     actual_dpe_classes = list(actual_dpe_mappings.keys())
     actual_dpe_classes_order = list(actual_dpe_mappings.keys())
 
@@ -35,9 +35,9 @@ def test_get_dpe_mappings(expected_dpe_classes, expected_dpe_classes_order, expe
     # Check if the dictionary keys are in ascending order
     assert actual_dpe_classes_order == expected_dpe_classes_order, "DPE classes are not in ascending order"
 
-    # Check if the dictionary values are in ascending order
+    # Check if the dictionary values are as in expected_dpe_values_order
     actual_dpe_values_order = [float(value) for value in list(actual_dpe_mappings.values())]
-    assert actual_dpe_values_order == expected_dpe_values_order, "DPE values are not in ascending order"
+    assert actual_dpe_values_order == expected_dpe_values_order, f"Expected {expected_dpe_values_order}, but got {actual_dpe_values_order}."
 
     # Additional check: verify each pair of actual_dpe_mappings is in correct order
     for i in range(len(actual_dpe_classes)):
