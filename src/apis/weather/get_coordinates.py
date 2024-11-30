@@ -36,7 +36,5 @@ def get_coordinates(city_name: str) -> Optional[Dict[str, float]]:
             return city_coordinates
         print(f"City {city_name} not found in France. Please, specify a city known in France.")
         return None
-
-    else:
-        print(f"Error fetching data: {response.status_code}")
-        return None
+    print(f"Error fetching data: {response.status_code}")
+    return None
