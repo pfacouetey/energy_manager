@@ -5,7 +5,7 @@ from unidecode import unidecode
 
 def get_department(city_name: str) -> Optional[str]:
     """
-    Get department for a given city.
+    Get department for a given city from OpenDataSoft API.
 
     Args:
         city_name (str): Name of the city.

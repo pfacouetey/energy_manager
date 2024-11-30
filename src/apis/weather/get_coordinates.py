@@ -6,7 +6,7 @@ from typing import Dict, Optional
 
 def get_coordinates(city_name: str) -> Optional[Dict[str, float]]:
     """
-    Get coordinates for a given city.
+    Get coordinates for a given city from OpenWeatherMap API.
 
     Args:
         city_name (str): Name of the city.
