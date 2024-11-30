@@ -2,12 +2,14 @@ import requests
 import pandas as pd
 from typing import Optional
 
+from energy_manager.src.utils.get_dpe_mappings import get_dpe_mappings
 from energy_manager.src.apis.buildings.get_department import get_department
 
 
-def get_buildings_dpe(city_name: str) -> Optional[pd.DataFrame]:
+def get_buildings_consumptions(city_name: str) -> Optional[pd.DataFrame]:
     """
-    Fetches buildings DPE data for a given city.
+    Fetches buildings DPE data from the OpenDataSoft API for a given city,
+    then converts it into an energy consumption per square meter.
 
     Args:
         city_name (str): Name of the city.
@@ -37,8 +39,7 @@ def get_buildings_dpe(city_name: str) -> Optional[pd.DataFrame]:
                      f"classe_energie = \"C\" or "
                      f"classe_energie = \"D\" or "
                      f"classe_energie = \"E\" or "
-                     f"classe_energie = \"F\" or "
-                     f"classe_energie = \"G\")",
+                     f"classe_energie = \"F\")",
             "group_by": "classe_energie, tr002_type_batiment_id"
         }
         response = requests.get(base_url, params=params)
@@ -59,7 +60,11 @@ def get_buildings_dpe(city_name: str) -> Optional[pd.DataFrame]:
                     new_data[["min_surface_in_square_meters", "max_surface_in_square_meters"]]).astype(float)
                 new_data["building_type"] = new_data["building_type"].astype(str)
                 new_data["dpe_class"] = pd.Categorical(
-                    new_data["dpe_class"], categories=["A", "B", "C", "D", "E", "F", "G"], ordered=True)
+                    new_data["dpe_class"], categories=["A", "B", "C", "D", "E", "F"], ordered=True)
+
+                dpe_mappings = get_dpe_mappings()
+                new_data["consumption_in_kwh_per_square_meter"] = new_data["dpe_class"].apply(
+                    lambda x: dpe_mappings.get(x, None)).astype(float)
 
                 return new_data
 
