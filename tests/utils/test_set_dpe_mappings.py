@@ -40,7 +40,7 @@ def test_get_dpe_mappings(expected_dpe_classes, expected_dpe_classes_order, expe
     assert actual_dpe_values_order == expected_dpe_values_order, f"Expected {expected_dpe_values_order}, but got {actual_dpe_values_order}."
 
     # Additional check: verify each pair of actual_dpe_mappings is in correct order
-    for i in range(len(actual_dpe_classes)):
+    for i, item in enumerate(actual_dpe_classes):
         if i + 1 < len(actual_dpe_classes):
-            assert int(actual_dpe_mappings[actual_dpe_classes[i]]) < int(actual_dpe_mappings[actual_dpe_classes[i + 1]]), \
-                f"Value for {actual_dpe_classes[i]} is not less than {actual_dpe_classes[i + 1]}"
+            assert int(actual_dpe_mappings[item]) < int(actual_dpe_mappings[actual_dpe_classes[i + 1]]), \
+                f"Value for {item} is not less than {actual_dpe_classes[i + 1]}"
