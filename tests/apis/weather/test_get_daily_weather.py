@@ -26,7 +26,7 @@ def city_name():
 
 @pytest.fixture
 def df_expected_daily_weather():
-    data_df = pd.read_csv(filepath_or_buffer=Path(__file__).parent.parent / "weather/fixtures/daily_weather.csv")
+    data_df = pd.read_csv(filepath_or_buffer=Path(__file__).parent / "fixtures/daily_weather.csv")
     data_df["date_time"] = pd.to_datetime(data_df["date_time"])
     data_df["temperature"] = data_df["temperature"].astype(float)
     data_df["weather_description"] = data_df["weather_description"].astype(str)
