@@ -67,10 +67,8 @@ def get_buildings_consumptions(city_name: str) -> Optional[pd.DataFrame]:
                     lambda x: dpe_mappings.get(x, None)).astype(float)
 
                 return new_data
-
-            else:
-                print(f"No infos on buildings energy consumption found for the city {city_name}.")
-                return None
+            print(f"No infos on buildings energy consumption found for the city {city_name}.")
+            return None
 
         else:
             print(f"Error fetching data: {response.status_code}")

@@ -24,7 +24,6 @@ def get_daily_weather(city_name: str, timestamps: List[int]) -> Optional[pd.Data
       if df_hourly_weather is None:
          print(f"Failed to fetch weather data for timestamp {timestamp}.")
          return None
-      else:
-         df_daily_weather.append(df_hourly_weather)
+      df_daily_weather.append(df_hourly_weather)
 
    return pd.concat(df_daily_weather, ignore_index=True)
