@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "energy_manager"
 version = "0.1.0"
-description = "A simple tool to optimize your house energy consumption based on seasons days in France !!!"
+description = "A simple tool for French consumers having EDF as energy provider, to give them hints on their houses energy consumption based on seasons !!!"
 authors = ["Prince Foli Acouetey"]
 license = "MIT"
 readme = "README.md"
