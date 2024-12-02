@@ -60,9 +60,9 @@ The package has access to:
 
 Based on the provided parameters, the package can offer a rough estimate of energy costs in euros per square meter for buildings in the same region as the user's. 
 The formula used for these estimates is :
-$$
-\text{Estimated Cost} = \frac{|EXPECTED\_TEMP - ACTUAL\_TEMP(h_x)| \times PERC \times DPE\_value \times ENERGY\_PRICE(h_x) \times DURATION}{INS\_FACTOR}
-$$
+```
+Estimated Cost = ( |EXPECTED_TEMP - ACTUAL_TEMP(h_x)| * PERC * DPE_value * ENERGY_PRICE(h_x) * DURATION ) / INS_FACTOR
+```
 
 ## Contributing
 
