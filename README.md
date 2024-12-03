@@ -62,7 +62,7 @@ The package has access to:
 Based on the provided parameters, the package can offer a rough estimate of energy costs in euros per square meter for buildings in the same region as the user's.
 
 These energy costs are estimated for a whole day based on one hour time step (12AM-1AM, 1AM-2AM, ..., 9PM-10PM, 10PM-11PM).
-The energy cost at a given time (for example `h_x = 1AM-2AM`) is given by:
+The energy cost at a given time `(h_x)` (for example `h_x = 1AM-2AM`) is defined by:
 ```
 Estimated Cost = ( |EXPECTED_TEMP - ACTUAL_TEMP(h_x)| * PERC * DPE_value * ENERGY_PRICE(h_x) ) / INS_FACTOR
 ```
