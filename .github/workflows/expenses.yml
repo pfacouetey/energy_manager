@@ -47,4 +47,4 @@ jobs:
         env:
           OPEN_WEATHER_API_KEY: ${{ secrets.OPEN_WEATHER_API_KEY }}
         run: |
-          poetry run pytest tests/apis/expenses/     
+          poetry run pytest tests/expenses/     
