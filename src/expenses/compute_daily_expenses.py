@@ -65,8 +65,6 @@ def compute_daily_expenses(
             ].values[0]
         )
     )
-
-    del df_hchp_hours, df_daily_weather, df_merged, df_edf_prices
     gc.collect()
 
     df_merged_three = df_merged_two.copy(deep=True)
@@ -93,11 +91,8 @@ def compute_daily_expenses(
             df_temp["building_type"] = building_type
             df_temp["dpe_class"] = dpe_class
             all_expenses.append(df_temp)
-            del df_temp, dpe_value
 
     df_expenses = pd.concat(all_expenses, ignore_index=True)
-
-    del all_expenses, df_buildings_consumptions, df_merged_three, building_type, dpe_class, all_options
     gc.collect()
 
     return df_expenses
