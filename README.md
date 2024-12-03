@@ -44,28 +44,31 @@ To estimate the energy consumption for heating or cooling a house, the user must
 
 #### Mandatory Parameters
 
-- **City Name (`CITY`)**: The name of the city where the house is located.
-- **Expected Temperature (`EXPECTED_TEMP`)**: The desired indoor temperature the user wants to maintain.
-- **DPE Percentage (`PERC`)**: A rough estimate (in percentage) of the house's DPE (Diagnostic de Performance Énergétique) rating that the user believes they are currently using or will use based on the current season.
+- **City Name (`USER_CITY_NAME`)**: The name of the city where the house is located.
+- **Expected Temperature (`USER_TEMPERATURE`)**: The desired indoor temperature the user wants to maintain.
+- **DPE Usage (`USER_DPE_USAGE`)**: A multiplication factor for the house's DPE (Diagnostic de Performance Énergétique).
 
 #### Optional Parameters
 
-- **Insulation Factor (`INS_FACTOR`)**: This refers to the insulation properties of the building materials used in the house, which help reduce heat loss or gain. If not provided, it defaults to 1.
+- **Insulation Factor (`USER_INSULATION_FACTOR`)**: This refers to the insulation properties of the building materials used in the house, which help reduce heat loss or gain. If not provided, it defaults to 1.
 
 #### Package Capabilities
 
 The package has access to:
 
-- Types, surface areas, and `DPE_value` of buildings present in the specified `CITY`.
-- Current temperature (`ACTUAL_TEMP(h_x)`) at a given hour (`h_x`) and corresponding energy price (`ENERGY_PRICE(h_x)`) for an entire day.
+- Types, surface areas, and `DPE_VALUE` of buildings present in the specified `CITY`.
+- Current temperature (`TEMPERATURE(h_x)`) at a given hour (`h_x`) and corresponding energy price (`ENERGY_PRICE(h_x)`) for an entire day.
 
 Based on the provided parameters, the package can offer a rough estimate of energy costs in euros per square meter for buildings in the same region as the user's.
 These energy costs are estimated for a whole day based on one hour time step (12AM-1AM, 1AM-2AM, ..., 10PM-11PM, 11PM-12AM).
 
 The energy cost at a given time `(h_x)` (for example `h_x = 1AM-2AM`), for a type of building, is defined by:
 ```
-Estimated Cost = ( |EXPECTED_TEMP - ACTUAL_TEMP(h_x)| * PERC * DPE_value * ENERGY_PRICE(h_x) ) / INS_FACTOR
+Estimated Cost = ( |USER_TEMPERATURE - TEMPERATURE(h_x)| * USER_DPE_USAGE * DPE_VALUE * ENERGY_PRICE(h_x) ) / USER_INSULATION_FACTOR
 ```
+
+What this formula shows is that, per square meter and for an insulation factor of 1 : 
+- The user believes he's currently using or will use `USER_USAGE*DPE_VALUE` as energy to elevate/decrease of his house surface temperature of 1 Celsius degree for 1 hour long.
 
 ## Contributing
 

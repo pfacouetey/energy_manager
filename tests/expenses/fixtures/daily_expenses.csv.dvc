@@ -1,0 +1,5 @@
+outs:
+- md5: 7d648af405df4016c35bfec665928346
+  size: 62208
+  hash: md5
+  path: daily_expenses.csv

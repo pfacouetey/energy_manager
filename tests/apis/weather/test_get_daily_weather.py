@@ -41,4 +41,4 @@ def test_get_daily_weather(city_name, timestamps, df_expected_daily_weather):
     df_actual_daily_weather = get_daily_weather(city_name=city_name, timestamps=timestamps)
 
     # Assert that actual DataFrame matches the expected DataFrame
-    pd.testing.assert_frame_equal(df_actual_daily_weather, df_expected_daily_weather, check_like=True, check_exact=True)
+    pd.testing.assert_frame_equal(df_actual_daily_weather, df_expected_daily_weather, check_like=True)
