@@ -1,4 +1,4 @@
-name: Get weather information
+name: Compute daily energy expenses
 
 on:
   push:
