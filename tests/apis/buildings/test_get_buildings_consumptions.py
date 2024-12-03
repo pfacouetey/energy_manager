@@ -11,15 +11,14 @@ def city_name():
 @pytest.fixture()
 def expected_columns():
     return [
-        "dpe_class", "building_type", "min_surface_in_square_meters", "max_surface_in_square_meters",
-        "consumption_in_kwh_per_square_meter"
+        "dpe_class", "building_type", "consumption_in_kwh_per_square_meter"
     ]
 
 @pytest.fixture()
 def expected_data_types(expected_columns):
     return pd.DataFrame({
         "columns": expected_columns,
-        "data_types": ["category", "object", "float64", "float64", "float64"]
+        "data_types": ["category", "object", "float64"]
     })
 
 @pytest.fixture()
@@ -48,15 +47,10 @@ def test_get_buildings_consumptions(city_name, expected_columns, expected_data_t
 
     # Check if the DataFrame data types are as expected
     actual_data_types = pd.DataFrame({
-        "columns": [
-            "dpe_class", "building_type", "min_surface_in_square_meters", "max_surface_in_square_meters",
-            "consumption_in_kwh_per_square_meter"
-        ],
+        "columns": ["dpe_class", "building_type", "consumption_in_kwh_per_square_meter"],
         "data_types": [
             df_actual_buildings_consumptions["dpe_class"].dtype,
             df_actual_buildings_consumptions["building_type"].dtype,
-            df_actual_buildings_consumptions["min_surface_in_square_meters"].dtype,
-            df_actual_buildings_consumptions["max_surface_in_square_meters"].dtype,
             df_actual_buildings_consumptions["consumption_in_kwh_per_square_meter"].dtype
         ]
     })
