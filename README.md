@@ -40,7 +40,9 @@ The weather information used in our calculations is sourced from the [Open Weath
 
 ### Energy Cost Estimation
 
-To estimate the energy consumption for heating or cooling a house, the user must provide three essential parameters:
+To estimate the energy consumption for heating or cooling a house, the user must provide three essential parameters.
+
+#### Mandatory Parameters
 
 - **City Name (`CITY`)**: The name of the city where the house is located.
 - **Expected Temperature (`EXPECTED_TEMP`)**: The desired indoor temperature the user wants to maintain.
@@ -49,7 +51,6 @@ To estimate the energy consumption for heating or cooling a house, the user must
 #### Optional Parameters
 
 - **Insulation Factor (`INS_FACTOR`)**: This refers to the insulation properties of the building materials used in the house, which help reduce heat loss or gain. If not provided, it defaults to 1.
-- **Duration (`DURATION`)**: The length of time (in hours) for which heating or cooling is required. If not specified, it defaults to 1 hour.
 
 #### Package Capabilities
 
@@ -58,10 +59,12 @@ The package has access to:
 - Types, surface areas, and `DPE_value` of buildings present in the specified `CITY`.
 - Current temperature (`ACTUAL_TEMP(h_x)`) at a given hour (`h_x`) and corresponding energy price (`ENERGY_PRICE(h_x)`) for an entire day.
 
-Based on the provided parameters, the package can offer a rough estimate of energy costs in euros per square meter for buildings in the same region as the user's. 
-The formula used for these estimates is :
+Based on the provided parameters, the package can offer a rough estimate of energy costs in euros per square meter for buildings in the same region as the user's.
+
+These energy costs are estimated for a whole day based on one hour time step (12AM-1AM, 1AM-2AM, ..., 9PM-10PM, 10PM-11PM).
+The energy cost at a given time (for example `h_x = 1AM-2AM`) is given by:
 ```
-Estimated Cost = ( |EXPECTED_TEMP - ACTUAL_TEMP(h_x)| * PERC * DPE_value * ENERGY_PRICE(h_x) * DURATION ) / INS_FACTOR
+Estimated Cost = ( |EXPECTED_TEMP - ACTUAL_TEMP(h_x)| * PERC * DPE_value * ENERGY_PRICE(h_x) ) / INS_FACTOR
 ```
 
 ## Contributing
