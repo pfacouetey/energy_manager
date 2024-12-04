@@ -1,25 +1,24 @@
-import os
 import requests
 from unidecode import unidecode
 from typing import Dict, Optional
 
 
-def get_coordinates(city_name: str) -> Optional[Dict[str, float]]:
+def get_coordinates(city_name: str, openweathermap_api_key: str) -> Optional[Dict[str, float]]:
     """
     Get coordinates for a given city from OpenWeatherMap API.
 
     Args:
         city_name (str): Name of the city.
+        openweathermap_api_key (str): OpenWeatherMap API key.
 
     Returns:
         Optional[Dict[str, float]]: Dictionary with "lat" and "lon" keys, or None if not found.
     """
-    api_key = os.getenv("OPEN_WEATHER_API_KEY")
     base_url = "http://api.openweathermap.org/geo/1.0/direct"
     params = {
         "q": f"{unidecode(city_name.strip().lower())}",
         "limit": 1,
-        "appid": api_key
+        "appid": openweathermap_api_key
     }
     response = requests.get(base_url, params=params)
 

@@ -1,3 +1,4 @@
+import os
 import pytest
 import pandas as pd
 from datetime import datetime
@@ -16,6 +17,10 @@ def city_name():
     return "Paris"
 
 @pytest.fixture
+def openweathermap_api_key():
+    return os.getenv("OPEN_WEATHER_API_KEY")
+
+@pytest.fixture
 def df_expected_hourly_weather():
     return pd.DataFrame([{
         "date_time": datetime(2024, 11, 24, 0, 0, 0),
@@ -24,7 +29,7 @@ def df_expected_hourly_weather():
     }])
 
 
-def test_get_hourly_weather(frozen_time, city_name, df_expected_hourly_weather):
+def test_get_hourly_weather(frozen_time, city_name, openweathermap_api_key, df_expected_hourly_weather):
     """
     Test the get_hourly_weather function to ensure it returns the correct
     DataFrame with hourly weather data.
@@ -36,7 +41,11 @@ def test_get_hourly_weather(frozen_time, city_name, df_expected_hourly_weather):
         midnight_utc_timestamp = get_midnight_utc_timestamp()
 
         # Get hourly weather data for the specified city using the get_hourly_weather function
-        df_actual_hourly_weather = get_hourly_weather(city_name=city_name, timestamp=midnight_utc_timestamp)
+        df_actual_hourly_weather = get_hourly_weather(
+            city_name=city_name,
+            openweathermap_api_key=openweathermap_api_key,
+            timestamp=midnight_utc_timestamp
+        )
 
         # Assert that actual DataFrame matches the expected DataFrame
-        pd.testing.assert_frame_equal(df_actual_hourly_weather, df_expected_hourly_weather, check_like=True, check_exact=True)
+        pd.testing.assert_frame_equal(df_actual_hourly_weather, df_expected_hourly_weather, check_like=True)

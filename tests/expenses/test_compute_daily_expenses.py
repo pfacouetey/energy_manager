@@ -1,3 +1,4 @@
+import os
 import pytest
 import pandas as pd
 from pathlib import Path
@@ -18,6 +19,10 @@ def user_temperature():
 @pytest.fixture
 def user_city_name():
     return "Nangis"
+
+@pytest.fixture
+def openweathermap_api_key():
+    return os.getenv("OPEN_WEATHER_API_KEY")
 
 @pytest.fixture
 def user_dpe_usage():
@@ -41,6 +46,7 @@ def test_compute_daily_expenses(
         frozen_time,
         user_temperature,
         user_city_name,
+        openweathermap_api_key,
         user_dpe_usage,
         user_insulation_factor,
         df_expected_daily_expenses
@@ -53,6 +59,7 @@ def test_compute_daily_expenses(
         df_actual_daily_expenses = compute_daily_expenses(
         user_temperature=user_temperature,
         user_city_name=user_city_name,
+        openweathermap_api_key=openweathermap_api_key,
         user_dpe_usage=user_dpe_usage,
         user_insulation_factor=user_insulation_factor
         )

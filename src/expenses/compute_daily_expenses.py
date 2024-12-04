@@ -13,6 +13,7 @@ from energy_manager.src.apis.buildings.get_buildings_consumptions import get_bui
 
 def compute_daily_expenses(
     user_city_name: str,
+    openweathermap_api_key: str,
     user_temperature: float,
     user_dpe_usage: float,
     user_insulation_factor: Optional[float] = 1.0
@@ -22,6 +23,7 @@ def compute_daily_expenses(
 
     Args:
         user_city_name (str): Name of the user's city.
+        openweathermap_api_key (str): OpenWeatherMap API key.
         user_temperature (float): Desired temperature by the user.
         user_dpe_usage (float): User's DPE usage.
         user_insulation_factor (float, optional): User's insulation factor. Defaults to 1.0.
@@ -38,7 +40,11 @@ def compute_daily_expenses(
     midnight_utc_timestamp = get_midnight_utc_timestamp()
     daily_timestamps = generate_daily_timestamps(start_timestamp=midnight_utc_timestamp)
 
-    df_daily_weather = get_daily_weather(city_name=user_city_name, timestamps=daily_timestamps)
+    df_daily_weather = get_daily_weather(
+        city_name=user_city_name,
+        openweathermap_api_key=openweathermap_api_key,
+        timestamps=daily_timestamps
+    )
     df_daily_weather["degree_diff"] = np.abs(df_daily_weather["temperature"] - user_temperature)
 
     del df_daily_weather["temperature"], daily_timestamps, midnight_utc_timestamp

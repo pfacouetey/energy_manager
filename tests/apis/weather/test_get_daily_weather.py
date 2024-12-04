@@ -1,3 +1,4 @@
+import os
 import pytest
 import pandas as pd
 from pathlib import Path
@@ -25,6 +26,10 @@ def city_name():
     return "Paris"
 
 @pytest.fixture
+def openweathermap_api_key():
+    return os.getenv("OPEN_WEATHER_API_KEY")
+
+@pytest.fixture
 def df_expected_daily_weather():
     data_df = pd.read_csv(filepath_or_buffer=Path(__file__).parent / "fixtures/daily_weather.csv")
     data_df["date_time"] = pd.to_datetime(data_df["date_time"])
@@ -32,13 +37,17 @@ def df_expected_daily_weather():
     data_df["weather_description"] = data_df["weather_description"].astype(str)
     return data_df
 
-def test_get_daily_weather(city_name, timestamps, df_expected_daily_weather):
+def test_get_daily_weather(city_name, openweathermap_api_key, timestamps, df_expected_daily_weather):
     """
     Test the test_get_daily_weather function to ensure it returns the correct
     DataFrame with daily weather data.
     """
     # Get daily weather data for the specified city using the get_daily_weather function
-    df_actual_daily_weather = get_daily_weather(city_name=city_name, timestamps=timestamps)
+    df_actual_daily_weather = get_daily_weather(
+        city_name=city_name,
+        openweathermap_api_key=openweathermap_api_key,
+        timestamps=timestamps
+    )
 
     # Assert that actual DataFrame matches the expected DataFrame
     pd.testing.assert_frame_equal(df_actual_daily_weather, df_expected_daily_weather, check_like=True)
