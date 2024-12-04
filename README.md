@@ -49,7 +49,7 @@ To estimate the energy consumption for heating or cooling a house, the user must
 - **DPE Usage (`USER_DPE_USAGE`)**: A multiplication factor for the house's DPE (Diagnostic de Performance Énergétique).
 - **API key (`OPEN WEATHER MAP API KEY`)**: This key will be used by `energy_manger` to get all required information on the user's city coordinates and its weather.
 
-To get a valid `OPEN WEATHER MAP API KEY`, refer to this link :  [`One Call API 3.0`] (https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base).
+To get a valid `OPEN WEATHER MAP API KEY`, refer to this link :  [`One Call API 3.0`](https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base).
 It's a `Subscription Pay As You Call` which will only makes you pay when you get over a daily limit of 1000 API calls if you're subscribing as an individual.
 
 #### Optional Parameters
