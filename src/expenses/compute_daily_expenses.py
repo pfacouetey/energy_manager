@@ -101,4 +101,8 @@ def compute_daily_expenses(
     df_expenses = pd.concat(all_expenses, ignore_index=True)
     gc.collect()
 
-    return df_expenses
+    columns_reordered = [
+        "date_time", "weather_description", "option_0", "option_1", "option_2", "option_3", "option_4", "building_type",
+        "dpe_class"]
+
+    return df_expenses[columns_reordered]
