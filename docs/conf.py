@@ -34,8 +34,3 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # a list of builtin themes.
 #
 html_theme = "sphinx_rtd_theme"
-
-# MyST-NB configuration
-myst_nb_config = {
-    "execution_mode": "none",  # Prevent automatic execution of notebooks
-}
