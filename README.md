@@ -89,6 +89,8 @@ What this formula shows is that, per square meter and for an insulation factor o
 
 - The user believes he's currently using or will use `user_dpe_usage*dpe_value` as energy to elevate/decrease of his house surface temperature of 1 Celsius degree for 1 hour long.
 
+For a more detailed example of how to use this package, you can refer to this [`online documentation for energy_manager`](https://energy-manager.readthedocs.io/en/stable/)
+
 ## Contributing
 
 Interested in contributing? Check out the contributing guidelines. 
