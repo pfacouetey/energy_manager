@@ -19,7 +19,7 @@ extensions = [
     "myst_nb",
     "autoapi.extension",
     "sphinx.ext.napoleon",
-    "sphinx.ext.viewcode",
+    "sphinx.ext.viewcode"
 ]
 autoapi_dirs = ["../src"]
 
@@ -35,6 +35,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 #
 html_theme = "sphinx_rtd_theme"
 
+# MyST-NB configuration
 myst_nb_config = {
-    "execution_mode": "none"  # or "manual" if you want to execute manually
+    "execution_mode": "none",  # Prevent automatic execution of notebooks
 }
