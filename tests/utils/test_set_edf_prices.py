@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 
-from energy_manager.src.utils.set_edf_prices import set_edf_prices
+from energy_manager.src.energy_manager.utils.set_edf_prices import set_edf_prices
 
 @pytest.fixture()
 def expected_subscriptions():

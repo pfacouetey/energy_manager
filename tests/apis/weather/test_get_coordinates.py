@@ -1,7 +1,7 @@
 import os
 import pytest
 
-from energy_manager.src.apis.weather.get_coordinates import get_coordinates
+from energy_manager.src.energy_manager.apis.weather.get_coordinates import get_coordinates
 
 
 @pytest.mark.parametrize(

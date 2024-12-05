@@ -3,7 +3,7 @@ import pytest
 from datetime import datetime
 from freezegun import freeze_time
 
-from energy_manager.src.utils.get_midnight_utc_timestamp import get_midnight_utc_timestamp
+from energy_manager.src.energy_manager.utils.get_midnight_utc_timestamp import get_midnight_utc_timestamp
 
 
 @pytest.fixture

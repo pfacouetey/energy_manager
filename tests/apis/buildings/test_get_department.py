@@ -1,6 +1,6 @@
 import pytest
 
-from energy_manager.src.apis.buildings.get_department import get_department
+from energy_manager.src.energy_manager.apis.buildings.get_department import get_department
 
 
 @pytest.mark.parametrize(

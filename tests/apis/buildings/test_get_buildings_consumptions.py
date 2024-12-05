@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 
-from energy_manager.src.apis.buildings.get_buildings_consumptions import get_buildings_consumptions
+from energy_manager.src.energy_manager.apis.buildings.get_buildings_consumptions import get_buildings_consumptions
 
 
 @pytest.fixture()
