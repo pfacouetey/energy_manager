@@ -5,7 +5,7 @@ from pathlib import Path
 from datetime import datetime
 from freezegun import freeze_time
 
-from energy_manager.src.expenses.compute_daily_expenses import compute_daily_expenses
+from energy_manager.src.energy_manager.expenses.compute_daily_expenses import compute_daily_expenses
 
 
 @pytest.fixture

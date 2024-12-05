@@ -13,15 +13,16 @@ $ pip install energy_manager
 `energy_manager` is a tool designed specifically for French consumers who currently use or plan to use EDF as their energy provider. `energy_manager` can be used to get insights on the house daily energy consumption of an EDF consumer as follows :
 
 ```python
-from energy_manager.src.expenses import compute_daily_expenses
+
+from energy_manager.expenses import compute_daily_expenses
 
 df_actual_daily_expenses = compute_daily_expenses(
-        user_temperature=user_temperature, # consumer house desired temperature
-        user_city_name=user_city_name, # consumer city name
-        openweathermap_api_key=openweathermap_api_key, # consumer openweathermap api key
-        user_dpe_usage=user_dpe_usage, # multiplicator factor to correct DPE value
-        user_insulation_factor=user_insulation_factor # consumer house insulation factor (optional)
-        )
+    user_temperature=user_temperature,  # consumer house desired temperature
+    user_city_name=user_city_name,  # consumer city name
+    openweathermap_api_key=openweathermap_api_key,  # consumer openweathermap api key
+    user_dpe_usage=user_dpe_usage,  # multiplicator factor to correct DPE value
+    user_insulation_factor=user_insulation_factor  # consumer house insulation factor (optional)
+)
 ```
 
 In the following sections, we provide the eligibility criteria, pricing options, time classification, and data sources used in `energy_manager`.

@@ -2,8 +2,8 @@ import requests
 import pandas as pd
 from typing import Optional
 
-from energy_manager.src.utils.set_dpe_mappings import set_dpe_mappings
-from energy_manager.src.apis.buildings.get_department import get_department
+from energy_manager.src.energy_manager.utils.set_dpe_mappings import set_dpe_mappings
+from energy_manager.src.energy_manager.apis.buildings.get_department import get_department
 
 
 def get_buildings_consumptions(city_name: str) -> Optional[pd.DataFrame]:

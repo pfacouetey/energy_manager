@@ -1,8 +1,7 @@
 import pandas as pd
 from typing import List, Optional
 
-from energy_manager.src.apis.weather.get_coordinates import get_coordinates
-from energy_manager.src.apis.weather.get_hourly_weather import get_hourly_weather
+from energy_manager.src.energy_manager.apis.weather.get_hourly_weather import *
 
 
 def get_daily_weather(city_name: str, openweathermap_api_key: str, timestamps: List[int]) -> Optional[pd.DataFrame]:
