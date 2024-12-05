@@ -16,9 +16,7 @@ def expected_data_types(expected_columns):
     })
 
 def test_set_hchp_hours(expected_columns, expected_data_types):
-    """
-    Test that the function set_hchp_hours returns the expected DataFrame.
-    """
+    """Test that the function set_hchp_hours returns the expected DataFrame."""
     df_actual_hchp_hours = set_hchp_hours()
 
     # Check if the DataFrame is of type pandas.DataFrame
