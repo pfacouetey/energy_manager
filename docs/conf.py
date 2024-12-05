@@ -34,3 +34,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # a list of builtin themes.
 #
 html_theme = "sphinx_rtd_theme"
+
+myst_nb_config = {
+    "execution_mode": "none"  # or "manual" if you want to execute manually
+}
