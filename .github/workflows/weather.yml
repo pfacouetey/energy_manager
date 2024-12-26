@@ -39,7 +39,6 @@ jobs:
 
       - name: Check AWS Configuration
         run: |
-          cat ~/.aws/config  # Print the AWS config for debugging purposes
           aws configure list-profiles
 
       - name: Run DVC Doctor
