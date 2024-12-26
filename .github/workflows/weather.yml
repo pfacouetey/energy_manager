@@ -14,25 +14,28 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         
-      - name: Set up Python 3.12.8
+      - name: Set up Python 3.12.0
         uses: actions/setup-python@v3
         with:
-          python-version: "3.12.8"
-
+          python-version: "3.12.0"
+          
       - name: Install Poetry
         run: |
-          pip install poetry 
+          pip install poetry
           poetry install --no-root
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.DVC_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.DVC_AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-north-1
+          
       - name: Pull DVC data from S3 bucket
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.DVC_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.DVC_AWS_SECRET_ACCESS_KEY }}
         run: |
           poetry run dvc pull --allow-missing
 
@@ -40,4 +43,4 @@ jobs:
         env:
           OPEN_WEATHER_API_KEY: ${{ secrets.OPEN_WEATHER_API_KEY }}
         run: |
-          poetry run pytest --cov tests/apis/weather/     
+          poetry run pytest --cov tests/apis/weather/
