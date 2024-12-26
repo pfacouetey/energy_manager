@@ -1,7 +1,15 @@
 # CHANGELOG
 
 
+## v0.3.1 (2024-12-26)
+
+
 ## v0.3.0 (2024-12-26)
+
+### Bug Fixes
+
+- **code**: Fix changelog.md and pyproject.toml
+  ([`1e32042`](https://github.com/pfacouetey/energy_manager/commit/1e320420069296d1da73580ecffe468b81adc586))
 
 ### Features
 
