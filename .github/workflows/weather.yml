@@ -41,13 +41,8 @@ jobs:
       - name: Check AWS Configuration
         run: cat ~/.aws/config
 
-      - name: Test AWS CLI
-        run: |
-          aws s3 ls s3://energy-manager --region eu-north-1
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.DVC_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.DVC_AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: eu-north-1
+      - name: Run DVC Doctor
+        run: poetry run dvc doctor
           
       - name: Pull DVC data from S3 bucket
         run: |
