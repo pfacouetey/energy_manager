@@ -34,10 +34,10 @@ jobs:
           DVC_AWS_SECRET_ACCESS_KEY: ${{ secrets.DVC_AWS_SECRET_ACCESS_KEY }}
         run: |
           mkdir -p ~/.aws
-          echo "[default]" > ~/.aws/config
-          echo "aws-access-key-id=${DVC_AWS_ACCESS_KEY_ID}" >> ~/.aws/config
-          echo "aws-secret-access-key=${DVC_AWS_SECRET_ACCESS_KEY}" >> ~/.aws/config
-          echo "aws-region=eu-north-1" >> ~/.aws/config
+          echo "[dvc]" > ~/.aws/config
+          echo "aws_access_key_id=${{ secrets.DVC_AWS_ACCESS_KEY_ID }}" >> ~/.aws/config
+          echo "aws_secret_access_key=${{ secrets.DVC_AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/config
+          echo "aws_region=eu-north-1" >> ~/.aws/config
           
       - name: Pull DVC data from S3 bucket
         run: |
