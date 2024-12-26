@@ -35,11 +35,6 @@ jobs:
           echo "[dvc]" > ~/.aws/config 
           echo "aws_access_key_id=${{ secrets.DVC_AWS_ACCESS_KEY_ID }}" >> ~/.aws/config
           echo "aws_secret_access_key=${{ secrets.DVC_AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/config
-          echo "region=eu-north-1" >> ~/.aws/config
-
-      - name: Check AWS Configuration
-        run: |
-          aws configure list-profiles
 
       - name: Run DVC Doctor
         run: poetry run dvc doctor
@@ -48,13 +43,11 @@ jobs:
         run: rm -rf .dvc/tmp
 
       - name: Pull DVC data from S3 bucket
-        env:
-          AWS_PROFILE: dvc  # Ensure this matches the profile in your AWS config
         run: |
-          poetry run dvc pull --allow-missing -v  # Use verbose output for debugging
+          poetry run dvc pull --allow-missing
 
       - name: Run tests with pytest
         env:
           OPEN_WEATHER_API_KEY: ${{ secrets.OPEN_WEATHER_API_KEY }}
         run: |
-          poetry run pytest --cov tests/apis/weather/
+          poetry run pytest --cov tests/apis/weather/     
