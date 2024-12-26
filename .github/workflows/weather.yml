@@ -18,10 +18,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         
-      - name: Set up Python 3.12.0
+      - name: Set up Python 3.10.5
         uses: actions/setup-python@v3
         with:
-          python-version: "3.12.0"
+          python-version: "3.10.5"
           
       - name: Install Poetry
         run: |
@@ -29,11 +29,15 @@ jobs:
           poetry install --no-root
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.DVC_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.DVC_AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-north-1
+        env:
+          DVC_AWS_ACCESS_KEY_ID: ${{ secrets.DVC_AWS_ACCESS_KEY_ID }}
+          DVC_AWS_SECRET_ACCESS_KEY: ${{ secrets.DVC_AWS_SECRET_ACCESS_KEY }}
+        run: |
+          mkdir -p ~/.aws
+          echo "[default]" > ~/.aws/config
+          echo "aws-access-key-id=${DVC_AWS_ACCESS_KEY_ID}" >> ~/.aws/config
+          echo "aws-secret-access-key=${DVC_AWS_SECRET_ACCESS_KEY}" >> ~/.aws/config
+          echo "aws-region=eu-north-1" >> ~/.aws/config
           
       - name: Pull DVC data from S3 bucket
         run: |
