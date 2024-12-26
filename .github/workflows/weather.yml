@@ -1,4 +1,4 @@
-name: Get weather information
+name: Get Weather Information
 
 on:
   push:
@@ -14,6 +14,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -22,21 +23,19 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: "3.12.8"
-          
+
       - name: Install Poetry
         run: |
-          pip install poetry
+          pip install poetry 
           poetry install --no-root
 
       - name: Configure AWS Credentials
-        env:
-          DVC_AWS_ACCESS_KEY_ID: ${{ secrets.DVC_AWS_ACCESS_KEY_ID }}
-          DVC_AWS_SECRET_ACCESS_KEY: ${{ secrets.DVC_AWS_SECRET_ACCESS_KEY }}
         run: |
           mkdir -p ~/.aws
-          echo "[dvc]" > ~/.aws/config
+          echo "[dvc]" > ~/.aws/config  # Use the profile name 'dvc'
           echo "aws_access_key_id=${{ secrets.DVC_AWS_ACCESS_KEY_ID }}" >> ~/.aws/config
           echo "aws_secret_access_key=${{ secrets.DVC_AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/config
+          echo "region=eu-north-1" >> ~/.aws/config
 
       - name: Check AWS Configuration
         run: cat ~/.aws/config
@@ -46,9 +45,12 @@ jobs:
 
       - name: Clean DVC Temporary Files
         run: rm -rf .dvc/tmp
-          
+
       - name: Pull DVC data from S3 bucket
-        run: AWS_PROFILE=dvc dvc pull
+        env:
+          AWS_PROFILE: dvc
+        run: |
+          poetry run dvc pull --allow-missing -v 
 
       - name: Run tests with pytest
         env:
