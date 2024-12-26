@@ -43,6 +43,9 @@ jobs:
 
       - name: Run DVC Doctor
         run: poetry run dvc doctor
+
+      - name: Clean DVC Temporary Files
+        run: rm -rf .dvc/tmp
           
       - name: Pull DVC data from S3 bucket
         run: |
