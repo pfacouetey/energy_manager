@@ -69,11 +69,11 @@ def test_compute_daily_expenses(
     """
     with freeze_time(frozen_time):
         actual_daily_expenses_df = compute_daily_expenses(
-            user_temperature=user_temperature,
-            user_city_name=user_city_name,
+            temperature=user_temperature,
+            city_name=user_city_name,
             openweathermap_api_key=openweathermap_api_key,
-            user_dpe_usage=user_dpe_usage,
-            user_insulation_factor=user_insulation_factor
+            dpe_usage=user_dpe_usage,
+            insulation_factor=user_insulation_factor
         )
 
     pd.testing.assert_frame_equal(
