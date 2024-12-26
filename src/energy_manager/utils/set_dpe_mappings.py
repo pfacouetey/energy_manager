@@ -1,16 +1,21 @@
 
 def set_dpe_mappings():
     """
-    Set mappings for DPE codes in France. DPE stands for 'Diagnostic de Performance Electrique'.
+    Creates and returns a dictionary that maps certain keys to specific
+    predefined values representing some DPE (Denoted Parameter Entity)
+    mappings.
 
     Returns:
-        dict: A dictionary with DPE codes as keys and corresponding energy consumptions for 1 m2 in kWh/year as values.
+        dict: A dictionary where each key corresponds to a specific letter
+        ('A' to 'F') and each value is a string representing a predefined
+        numeric value associated with that letter.
     """
-    return {
-    "A": "70",
-    "B": "110",
-    "C": "180",
-    "D": "250",
-    "E": "330",
-    "F": "420"
+    dpe_mappings = {
+        "A": "70",
+        "B": "110",
+        "C": "180",
+        "D": "250",
+        "E": "330",
+        "F": "420"
     }
+    return dpe_mappings

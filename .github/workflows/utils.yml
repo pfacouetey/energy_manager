@@ -1,4 +1,4 @@
-name: Get buildings information
+name: Verify utils functions
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Set up Python 3.12.8
         uses: actions/setup-python@v3
         with:
@@ -31,4 +31,4 @@ jobs:
 
       - name: Run tests with pytest
         run: |
-          poetry run pytest --cov tests/apis/buildings/     
+          poetry run pytest --cov tests/utils/     

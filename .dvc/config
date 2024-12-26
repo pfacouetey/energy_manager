@@ -1,4 +1,5 @@
 [core]
-    remote = myremote
-['remote "myremote"']
+    remote = myremote1
+['remote "myremote1"']
     url = s3://energy-manager
+    profile = dvc

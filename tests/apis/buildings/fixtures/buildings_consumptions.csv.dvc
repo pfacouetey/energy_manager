@@ -1,0 +1,5 @@
+outs:
+- md5: b21dbd0eae69fab59b30b5c4394ecd10
+  size: 680
+  hash: md5
+  path: buildings_consumptions.csv

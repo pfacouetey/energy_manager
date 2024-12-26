@@ -3,15 +3,20 @@ from pathlib import Path
 
 def set_hchp_hours():
     """
-    Identify for a whole day which hours can be considered as 'Heures Creuses' or 'Heures Pleines' in France,
-    based on ENEDIS proposals in the context of an EDF subscription for electricity.
+    Loads and processes the HCHP hours data from a CSV file. This function reads
+    the CSV file from a specified path, converts the "hour" column to integers,
+    and ensures that the "option_1", "option_2", "option_3", and "option_4"
+    columns are of string type. The processed DataFrame is returned for further use.
+
     Returns:
-        pd.DataFrame: A DataFrame containing the qualification of each hour (in 24-hour format) as 'Heures Creuses' or 'Heures Pleines'.
+        pd.DataFrame: A DataFrame containing the loaded and processed HCHP hours
+        data with the "hour" column as integers and the specified option columns
+        as strings.
     """
-    df_hchp_hours = pd.read_csv(filepath_or_buffer=Path(__file__).parent / "data/hchp_hours.csv")
+    hchp_hours_df = pd.read_csv(filepath_or_buffer=Path(__file__).parent / "data/hchp_hours.csv")
 
-    df_hchp_hours["hour"] =  df_hchp_hours["hour"].astype(int)
-    df_hchp_hours[["option_1", "option_2", "option_3", "option_4"]] = (
-        df_hchp_hours[["option_1", "option_2", "option_3", "option_4"]].astype(str))
+    hchp_hours_df["hour"] =  hchp_hours_df["hour"].astype(int)
+    hchp_hours_df[["option_1", "option_2", "option_3", "option_4"]] = (
+        hchp_hours_df[["option_1", "option_2", "option_3", "option_4"]].astype(str))
 
-    return df_hchp_hours
+    return hchp_hours_df

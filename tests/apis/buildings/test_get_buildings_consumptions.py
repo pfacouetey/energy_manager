@@ -1,60 +1,59 @@
 import pytest
 import pandas as pd
+from pathlib import Path
 
-from energy_manager.src.energy_manager.apis.buildings.get_buildings_consumptions import get_buildings_consumptions
+from src.energy_manager.apis.buildings.get_buildings_consumptions import get_buildings_consumptions
+
+TOL_FLOAT = 1e-06
 
 
 @pytest.fixture()
 def city_name():
     return "Nice"
 
-@pytest.fixture()
-def expected_columns():
-    return [
-        "dpe_class", "building_type", "consumption_in_kwh_per_square_meter"
-    ]
+@pytest.fixture
+def expected_buildings_consumptions_df():
+    data_df = pd.read_csv(filepath_or_buffer=Path(__file__).parent / "fixtures/buildings_consumptions.csv")
+    data_df["dpe_class"] = pd.Categorical(
+        data_df["dpe_class"],
+        categories=["A", "B", "C", "D", "E", "F"],
+        ordered=True
+    )
+    data_df["consumption_in_kwh_per_square_meter"] = data_df["consumption_in_kwh_per_square_meter"].astype(float)
+    data_df["building_type"] = data_df["building_type"].astype(str)
+    return data_df
 
-@pytest.fixture()
-def expected_data_types(expected_columns):
-    return pd.DataFrame({
-        "columns": expected_columns,
-        "data_types": ["category", "object", "float64"]
-    })
-
-@pytest.fixture()
-def expected_dpe_classes():
-    return ["A", "B", "C", "D", "E", "F"]
-
-def test_get_buildings_consumptions(city_name, expected_columns, expected_data_types, expected_dpe_classes):
+def test_get_buildings_consumptions(
+        city_name,
+        expected_buildings_consumptions_df,
+):
     """
-    Test that the function get_buildings_consumptions returns the expected DataFrame.
+    Tests the `get_buildings_consumptions` function to ensure that it returns
+    a pandas DataFrame whose contents match the expected values for the
+    provided city. The function is evaluated by checking the type of the
+    returned value and comparing the DataFrame against an expected DataFrame
+    with a specified tolerance.
+
+    Args:
+        city_name: Name of the city for which building consumption data is
+            fetched.
+        expected_buildings_consumptions_df: Expected pandas DataFrame containing
+            the building consumption data for the city.
+
+    Raises:
+        AssertionError: If the returned value is not a pandas DataFrame or
+            if the returned DataFrame does not match the expected DataFrame
+            within the specified tolerance.
     """
-    df_actual_buildings_consumptions = get_buildings_consumptions(city_name=city_name)
+    actual_buildings_consumptions_df = get_buildings_consumptions(city_name=city_name)
 
-    # Check if the DataFrame is of type pandas.DataFrame
-    assert isinstance(df_actual_buildings_consumptions, pd.DataFrame), (
-        f"Expected a pandas.DataFrame for {city_name}, but got {type(df_actual_buildings_consumptions)}"
+    assert isinstance(actual_buildings_consumptions_df, pd.DataFrame), (
+        f"Expected a pandas.DataFrame for {city_name}, but got {type(actual_buildings_consumptions_df)}"
     )
 
-    # Check if the DataFrame contains the expected columns
-    actual_columns = df_actual_buildings_consumptions.columns.tolist()
-    assert len(actual_columns) == len(expected_columns), (
-        f"Expected {len(expected_columns)} columns for {city_name}, but got {len(actual_columns)}"
+    pd.testing.assert_frame_equal(
+        expected_buildings_consumptions_df,
+        actual_buildings_consumptions_df,
+        check_exact=False,
+        atol=TOL_FLOAT
     )
-    assert all(column in actual_columns for column in expected_columns), (
-        f"Expected columns {expected_columns} for {city_name}, but got {actual_columns}"
-    )
-
-    # Check if the DataFrame data types are as expected
-    actual_data_types = pd.DataFrame({
-        "columns": ["dpe_class", "building_type", "consumption_in_kwh_per_square_meter"],
-        "data_types": [
-            df_actual_buildings_consumptions["dpe_class"].dtype,
-            df_actual_buildings_consumptions["building_type"].dtype,
-            df_actual_buildings_consumptions["consumption_in_kwh_per_square_meter"].dtype
-        ]
-    })
-    pd.testing.assert_frame_equal(actual_data_types, expected_data_types, check_like=True, check_exact=True)
-
-    # Check if the DataFrame contains the expected DPE classes
-    assert list(df_actual_buildings_consumptions["dpe_class"].cat.categories) == expected_dpe_classes

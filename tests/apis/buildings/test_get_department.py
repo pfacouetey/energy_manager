@@ -1,10 +1,10 @@
 import pytest
 
-from energy_manager.src.energy_manager.apis.buildings.get_department import get_department
+from src.energy_manager.apis.buildings.get_department import get_department
 
 
 @pytest.mark.parametrize(
-    "city_name, city_expected_department",
+    "city_name, expected_city_department",
     [
         ("Nancy", "Meurthe-et-Moselle"),
         ("NaNcy ", "Meurthe-et-Moselle"),
@@ -14,18 +14,27 @@ from energy_manager.src.energy_manager.apis.buildings.get_department import get_
         ("BoRDeauX", "Gironde"),
         ("LiLle", "Nord"),
         ("Nice", "Alpes-Maritimes"),
-        ("Lyon", "Rhône")
+        ("Lyon", "Rhône"),
     ]
 )
 
-def test_get_department(city_name, city_expected_department):
+def test_get_department(
+        city_name,
+        expected_city_department,
+):
     """
-    Test the get_department function to ensure it returns correct departments for known cities.
-    """
-    # Get department for the specified city using the function get_department
-    city_actual_department = get_department(city_name)
+    Tests the `get_department` function to verify that it correctly returns the expected
+    department name associated with a given city name.
 
-    # Assert that actual department matches expected department
-    assert city_actual_department == city_expected_department, (
-        f"Expected {city_expected_department}, but got {city_actual_department}"
+    This test function uses parameterized inputs to validate the function against various
+    city names, ensuring the function handles case sensitivity and extra spaces appropriately.
+
+    Args:
+        city_name (str): The name of the city to query for its corresponding department.
+        expected_city_department (str): The expected department name for the given city.
+    """
+    actual_city_department = get_department(city_name)
+
+    assert actual_city_department == expected_city_department, (
+        f"Expected {expected_city_department}, but got {actual_city_department}"
     )

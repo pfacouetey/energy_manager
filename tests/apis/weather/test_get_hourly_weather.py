@@ -4,8 +4,10 @@ import pandas as pd
 from datetime import datetime
 from freezegun import freeze_time
 
-from energy_manager.src.energy_manager.apis.weather.get_hourly_weather import get_hourly_weather
-from energy_manager.src.energy_manager.utils.get_midnight_utc_timestamp import get_midnight_utc_timestamp
+from src.energy_manager.apis.weather.get_hourly_weather import get_hourly_weather
+from src.energy_manager.utils.get_midnight_utc_timestamp import get_midnight_utc_timestamp
+
+TOL_FLOAT = 1e-06
 
 
 @pytest.fixture
@@ -21,31 +23,57 @@ def openweathermap_api_key():
     return os.getenv("OPEN_WEATHER_API_KEY")
 
 @pytest.fixture
-def df_expected_hourly_weather():
-    return pd.DataFrame([{
-        "date_time": datetime(2024, 11, 24, 0, 0, 0),
-        "temperature": 11.22,
-        "weather_description": "clear sky",
-    }])
+def expected_hourly_weather_df():
+    return pd.DataFrame(
+        [
+            {
+                "date_time": datetime(2024, 11, 24, 0, 0, 0),
+                "temperature": 11.22,
+                "weather_description": "clear sky",
+            }
+        ]
+    )
 
 
-def test_get_hourly_weather(frozen_time, city_name, openweathermap_api_key, df_expected_hourly_weather):
+def test_get_hourly_weather(
+        frozen_time,
+        city_name,
+        openweathermap_api_key,
+        expected_hourly_weather_df,
+):
     """
-    Test the get_hourly_weather function to ensure it returns the correct
-    DataFrame with hourly weather data.
+    Tests the function `get_hourly_weather` to ensure it retrieves the hourly weather
+    data for the specified city and matches the expected data. The function uses a
+    predefined frozen time to validate time-dependent logic, such as timestamp
+    handling.
+
+    Args:
+        frozen_time: The mock time to be frozen during the test, allowing consistent
+            evaluation of time-dependent functionalities.
+        city_name: The name of the city for which the hourly weather data is to be
+            fetched.
+        openweathermap_api_key: The API key required to authenticate requests to the
+            OpenWeatherMap API.
+        expected_hourly_weather_df: The expected pandas DataFrame containing the
+            hourly weather data against which the actual fetched data is validated.
+
+    Raises:
+        AssertionError: If the actual hourly weather DataFrame doesn't match the
+            expected DataFrame.
     """
-    # Set the frozen time to November 24, 2024, 9:30:45 AM UTC
     with freeze_time(frozen_time):
 
-        # Get the Unix timestamp for midnight UTC of the frozen date using the get_midnight_utc function
         midnight_utc_timestamp = get_midnight_utc_timestamp()
 
-        # Get hourly weather data for the specified city using the get_hourly_weather function
-        df_actual_hourly_weather = get_hourly_weather(
+        actual_hourly_weather_df = get_hourly_weather(
             city_name=city_name,
             openweathermap_api_key=openweathermap_api_key,
             timestamp=midnight_utc_timestamp
         )
 
-        # Assert that actual DataFrame matches the expected DataFrame
-        pd.testing.assert_frame_equal(df_actual_hourly_weather, df_expected_hourly_weather, check_like=True)
+        pd.testing.assert_frame_equal(
+            actual_hourly_weather_df,
+            expected_hourly_weather_df,
+            check_exact=False,
+            atol=TOL_FLOAT
+        )

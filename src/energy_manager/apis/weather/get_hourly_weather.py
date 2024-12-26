@@ -2,25 +2,38 @@ import requests
 import pandas as pd
 from typing import Optional
 
-from energy_manager.src.energy_manager.apis.weather.get_coordinates import get_coordinates
+from src.energy_manager.apis.weather.get_coordinates import get_coordinates
 
 
-def get_hourly_weather(city_name: str, openweathermap_api_key: str, timestamp: int) -> Optional[pd.DataFrame]:
+def get_hourly_weather(
+        city_name: str,
+        timestamp: int,
+        openweathermap_api_key: str,
+) -> Optional[pd.DataFrame]:
    """
-   Fetches weather data for a given city at a specific Unix timestamp from OpenWeatherMap API.
+   Fetches the hourly weather data for a given city and timestamp using the OpenWeatherMap
+   API and formats it into a pandas DataFrame with specific columns.
+
+   This function retrieves historical weather data for a specific city and timestamp by making an
+   API call to the OpenWeatherMap One Call Timemachine endpoint. The data is then processed into a
+   DataFrame, which includes columns for datetime, temperature, and weather description. If the data
+   cannot be retrieved or parsed, the function returns None.
 
    Args:
-       city_name (str): Name of the city.
-       openweathermap_api_key (str): OpenWeatherMap API key.
-       timestamp (int): Unix timestamp for the weather data.
+       city_name (str): Name of the target city for which weather data is requested.
+       timestamp (int): Unix timestamp representing the date and hour for fetching weather data.
+       openweathermap_api_key (str): API key for accessing the OpenWeatherMap service.
 
    Returns:
-       Optional[pd.DataFrame]: DataFrame with weather data, or None if data fetch fails.
+       Optional[pd.DataFrame]: A DataFrame containing weather data with columns for datetime,
+       temperature, and weather description, or None if data cannot be retrieved or parsed.
    """
    base_url = "https://api.openweathermap.org/data/3.0/onecall/timemachine?"
 
    city_coordinates = get_coordinates(city_name=city_name, openweathermap_api_key=openweathermap_api_key)
-   if not city_coordinates: return None
+   if not city_coordinates:
+      print(f"Failed to retrieve coordinates for city {city_name}.")
+      return None
 
    params = {
       "lon": city_coordinates["lon"],
@@ -36,13 +49,18 @@ def get_hourly_weather(city_name: str, openweathermap_api_key: str, timestamp: i
       return None
 
    data = response.json()
-
    required_columns = ["dt", "temp", "weather"]
-   df_hourly_weather = pd.DataFrame(data["data"])[required_columns]
-   df_hourly_weather["dt"] = pd.to_datetime(df_hourly_weather["dt"], unit="s")
-   df_hourly_weather["weather"] = df_hourly_weather["weather"].apply(lambda x: x[0]["description"])
-   df_hourly_weather["temp"] = df_hourly_weather["temp"].astype(float)
+   hourly_weather_df = pd.DataFrame(data["data"])[required_columns]
+   hourly_weather_df["dt"] = pd.to_datetime(hourly_weather_df["dt"], unit="s")
+   hourly_weather_df["weather"] = hourly_weather_df["weather"].apply(lambda x: x[0]["description"])
+   hourly_weather_df["temp"] = hourly_weather_df["temp"].astype(float)
 
-   df_hourly_weather.rename(columns={"dt": "date_time", "temp": "temperature", "weather": "weather_description"}, inplace=True)
-
-   return df_hourly_weather
+   hourly_weather_df.rename(
+      columns={
+         "dt": "date_time",
+         "temp": "temperature",
+         "weather": "weather_description",
+      },
+      inplace=True,
+   )
+   return hourly_weather_df
