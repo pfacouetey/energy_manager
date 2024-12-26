@@ -29,6 +29,23 @@ jobs:
           pip install poetry 
           poetry install --no-root
 
+      - name: Configure AWS Credentials
+        run: |
+          mkdir -p ~/.aws
+          echo "[profile dvc]" > ~/.aws/config 
+          echo "aws_access_key_id=${{ secrets.DVC_AWS_ACCESS_KEY_ID }}" >> ~/.aws/config
+          echo "aws_secret_access_key=${{ secrets.DVC_AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/config
+
+      - name: Run DVC Doctor
+        run: poetry run dvc doctor
+
+      - name: Clean DVC Temporary Files
+        run: rm -rf .dvc/tmp
+
+      - name: Pull DVC data from S3 bucket
+        run: |
+          poetry run dvc pull --allow-missing
+
       - name: Run tests with pytest
         run: |
           poetry run pytest --cov tests/apis/buildings/     
