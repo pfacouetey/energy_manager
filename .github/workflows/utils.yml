@@ -46,20 +46,6 @@ jobs:
         run: |
           poetry run dvc pull --allow-missing
 
-      - name: Configure AWS Credentials
-        env:
-          DVC_AWS_ACCESS_KEY_ID: ${{ secrets.DVC_AWS_ACCESS_KEY_ID }}
-          DVC_AWS_SECRET_ACCESS_KEY: ${{ secrets.DVC_AWS_SECRET_ACCESS_KEY }}
-        run: |
-          mkdir -p ~/.aws
-          echo "[default]" > ~/.aws/config
-          echo "aws_access_key_id=${DVC_AWS_ACCESS_KEY_ID}" >> ~/.aws/config
-          echo "aws_secret_access_key=${DVC_AWS_SECRET_ACCESS_KEY}" >> ~/.aws/config
-
-      - name: Pull DVC data from S3 bucket
-        run: |
-          poetry run dvc pull --allow-missing
-
       - name: Run tests with pytest
         run: |
           poetry run pytest --cov tests/utils/     
