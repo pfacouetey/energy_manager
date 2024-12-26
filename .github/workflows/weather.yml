@@ -48,8 +48,12 @@ jobs:
         run: rm -rf .dvc/tmp
           
       - name: Pull DVC data from S3 bucket
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.DVC_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DVC_AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: eu-north-1
         run: |
-          poetry run dvc pull --allow-missing
+          poetry run dvc pull --allow-missing -v
 
       - name: Run tests with pytest
         env:
