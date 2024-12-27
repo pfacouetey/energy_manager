@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "energy_manager"
-version = "0.3.3"
+version = "0.3.4"
 description = "A simple tool for French consumers having EDF as energy provider, to give them hints on their houses energy consumption based on seasons !!!"
 authors = ["Prince Foli Acouetey"]
 license = "MIT"

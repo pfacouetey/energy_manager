@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.3.4 (2024-12-27)
+
+### Bug Fixes
+
+- **code_variables**: Update yaml files, and rename some variables
+  ([`9a7fd47`](https://github.com/pfacouetey/energy_manager/commit/9a7fd4749f312debc94cbb386edf3c49686368cc))
+
+
 ## v0.3.3 (2024-12-27)
 
 
