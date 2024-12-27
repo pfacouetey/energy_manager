@@ -15,11 +15,11 @@ def frozen_time():
     return datetime(2024, 11, 24, 9, 30, 45)
 
 @pytest.fixture
-def user_temperature():
+def temperature():
     return 20.0
 
 @pytest.fixture
-def user_city_name():
+def city_name():
     return "Nangis"
 
 @pytest.fixture
@@ -27,11 +27,11 @@ def openweathermap_api_key():
     return os.getenv("OPEN_WEATHER_API_KEY")
 
 @pytest.fixture
-def user_dpe_usage():
+def dpe_usage():
     return 1.0
 
 @pytest.fixture
-def user_insulation_factor():
+def insulation_factor():
     return 1.5
 
 @pytest.fixture
@@ -46,34 +46,38 @@ def expected_daily_expenses_df():
 
 def test_compute_daily_expenses(
         frozen_time,
-        user_temperature,
-        user_city_name,
+        temperature,
+        city_name,
         openweathermap_api_key,
-        user_dpe_usage,
-        user_insulation_factor,
+        dpe_usage,
+        insulation_factor,
         expected_daily_expenses_df,
 ):
     """
-    Test function to verify the correctness of the `compute_daily_expenses` function by freezing the time and
-    comparing the result against expected data. It ensures that the computed daily expenses dataframe matches
-    the provided expected dataframe within allowed tolerance.
+    Tests the `compute_daily_expenses` function by comparing its output against the expected
+    DataFrame of daily expenses. The comparison ensures accuracy within a defined tolerance
+    level (`TOL_FLOAT`). The test uses a frozen time to provide consistent, deterministic
+    results during execution.
 
     Args:
-        frozen_time: The specific timestamp string at which the function's output should be evaluated.
-        user_temperature: The temperature input provided by the user for expense calculation.
-        user_city_name: The name of the city provided by the user to fetch environmental data.
-        openweathermap_api_key: The API key used for authenticating requests to the OpenWeatherMap service.
-        user_dpe_usage: The user's declared energy consumption level, used for computation.
-        user_insulation_factor: The insulation factor provided by the user, influencing energy use estimation.
-        expected_daily_expenses_df: The expected pandas DataFrame containing the daily expenses to validate against.
+        frozen_time: The datetime to freeze time at during the test.
+        temperature: The temperature value used as part of the input to compute daily expenses.
+        city_name: The name of the city used to fetch weather data in the calculation.
+        openweathermap_api_key: The API key to access the OpenWeatherMap service, which is
+            used to fetch weather-related data.
+        dpe_usage: The energy consumption data used in the daily expenses computation.
+        insulation_factor: A factor reflecting the efficiency of insulation used in the
+            energy cost calculations.
+        expected_daily_expenses_df: The expected DataFrame containing the calculated daily
+            expenses to validate the function output against.
     """
     with freeze_time(frozen_time):
         actual_daily_expenses_df = compute_daily_expenses(
-            temperature=user_temperature,
-            city_name=user_city_name,
+            temperature=temperature,
+            city_name=city_name,
             openweathermap_api_key=openweathermap_api_key,
-            dpe_usage=user_dpe_usage,
-            insulation_factor=user_insulation_factor
+            dpe_usage=dpe_usage,
+            insulation_factor=insulation_factor
         )
 
     pd.testing.assert_frame_equal(
