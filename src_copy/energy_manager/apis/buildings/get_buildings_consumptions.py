@@ -2,8 +2,8 @@ import requests
 import pandas as pd
 from typing import Optional
 
-from energy_manager.utils.set_dpe_mappings import set_dpe_mappings
-from energy_manager.apis.buildings.get_department import get_department
+from src_copy.energy_manager.utils.set_dpe_mappings import set_dpe_mappings
+from src_copy.energy_manager.apis.buildings.get_department import get_department
 
 DPE_CATEGORIES = ["A", "B", "C", "D", "E", "F"]
 

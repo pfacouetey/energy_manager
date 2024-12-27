@@ -25,7 +25,7 @@ A tool to optimize your house energy consumption!
 ## Installation and Setup
 To install `energy_manager`, you can simply run the command:
 ```bash
-$ pip install energy_manager
+  pip install energy_manager
 ```
 
 ## Usage

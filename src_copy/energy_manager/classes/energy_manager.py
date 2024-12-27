@@ -1,6 +1,6 @@
 import pandas as pd
 
-from energy_manager.expenses.compute_daily_expenses import compute_daily_expenses
+from src_copy.energy_manager.expenses.compute_daily_expenses import compute_daily_expenses
 
 
 class EnergyManager(object):

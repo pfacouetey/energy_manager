@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 
-from src.energy_manager.utils.set_hchp_hours import set_hchp_hours
+from src_copy.energy_manager.utils.set_hchp_hours import set_hchp_hours
 
 
 @pytest.fixture()

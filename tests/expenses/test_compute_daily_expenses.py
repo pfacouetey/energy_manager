@@ -5,7 +5,7 @@ from pathlib import Path
 from datetime import datetime
 from freezegun import freeze_time
 
-from src.energy_manager.expenses.compute_daily_expenses import compute_daily_expenses
+from src_copy.energy_manager.expenses.compute_daily_expenses import compute_daily_expenses
 
 TOL_FLOAT = 1e-06
 

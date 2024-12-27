@@ -1,8 +1,8 @@
 import pandas as pd
 from typing import List, Optional
 
-from energy_manager.apis.weather.get_coordinates import get_coordinates
-from energy_manager.apis.weather.get_hourly_weather import get_hourly_weather
+from src_copy.energy_manager.apis.weather.get_coordinates import get_coordinates
+from src_copy.energy_manager.apis.weather.get_hourly_weather import get_hourly_weather
 
 
 def get_daily_weather(

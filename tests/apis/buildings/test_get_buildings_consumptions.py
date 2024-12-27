@@ -2,7 +2,7 @@ import pytest
 import pandas as pd
 from pathlib import Path
 
-from src.energy_manager.apis.buildings.get_buildings_consumptions import get_buildings_consumptions
+from src_copy.energy_manager.apis.buildings.get_buildings_consumptions import get_buildings_consumptions
 
 TOL_FLOAT = 1e-06
 

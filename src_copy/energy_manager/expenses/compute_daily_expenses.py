@@ -3,12 +3,12 @@ import numpy as np
 import pandas as pd
 from typing import Optional
 
-from energy_manager.utils.set_edf_prices import set_edf_prices
-from energy_manager.utils.set_hchp_hours import set_hchp_hours
-from energy_manager.apis.weather.get_daily_weather import get_daily_weather
-from energy_manager.utils.generate_daily_timestamps import generate_daily_timestamps
-from energy_manager.utils.get_midnight_utc_timestamp import get_midnight_utc_timestamp
-from energy_manager.apis.buildings.get_buildings_consumptions import get_buildings_consumptions
+from src_copy.energy_manager.utils.set_edf_prices import set_edf_prices
+from src_copy.energy_manager.utils.set_hchp_hours import set_hchp_hours
+from src_copy.energy_manager.apis.weather.get_daily_weather import get_daily_weather
+from src_copy.energy_manager.utils.generate_daily_timestamps import generate_daily_timestamps
+from src_copy.energy_manager.utils.get_midnight_utc_timestamp import get_midnight_utc_timestamp
+from src_copy.energy_manager.apis.buildings.get_buildings_consumptions import get_buildings_consumptions
 
 
 def compute_daily_expenses(

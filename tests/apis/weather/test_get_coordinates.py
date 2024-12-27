@@ -1,7 +1,7 @@
 import os
 import pytest
 
-from src.energy_manager.apis.weather.get_coordinates import get_coordinates
+from src_copy.energy_manager.apis.weather.get_coordinates import get_coordinates
 
 TOL_FLOAT = 1e-06
 

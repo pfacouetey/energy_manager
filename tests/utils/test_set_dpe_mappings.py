@@ -1,6 +1,6 @@
 import pytest
 
-from src.energy_manager.utils.set_dpe_mappings import set_dpe_mappings
+from src_copy.energy_manager.utils.set_dpe_mappings import set_dpe_mappings
 
 
 @pytest.fixture()
