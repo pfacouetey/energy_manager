@@ -1,6 +1,9 @@
 # CHANGELOG
 
 
+## v0.3.3 (2024-12-27)
+
+
 ## v0.3.2 (2024-12-27)
 
 ### Bug Fixes
@@ -8,6 +11,9 @@
 - **code**: Fix problems with code structure to enable ebtetr tests config and better notebook
   examples
   ([`750c455`](https://github.com/pfacouetey/energy_manager/commit/750c45501dd84df487b7fefa2d0b4fff4db8b4cc))
+
+- **data**: Add important data
+  ([`15b2937`](https://github.com/pfacouetey/energy_manager/commit/15b2937ac037ab16bee46c4a12d3bee371b6c7cf))
 
 
 ## v0.3.1 (2024-12-26)
